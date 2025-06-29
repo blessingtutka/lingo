@@ -1,0 +1,16 @@
+@import './index.css';
+
+@layer utilities {
+    .content-bg {
+        @apply w-full  bg-cover bg-center bg-welcome bg-fixed bg-no-repeat;
+    }
+
+    .home-bg {
+        background-color: rgba(3, 7, 18, 0.92);
+        @apply rounded-md;
+    }
+
+    .main-btn {
+        @apply bg-blue-500 text-white hover:bg-blue-700;
+    }
+}
