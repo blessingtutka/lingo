@@ -5,6 +5,7 @@ interface User {
     avatar?: string;
     phone?: string;
     contacts?: User[];
+    token?: string;
 }
 
 interface Summary {
