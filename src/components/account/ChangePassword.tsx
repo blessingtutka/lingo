@@ -7,8 +7,10 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { toast } from 'sonner';
 import { PasswordInput } from '@/components/global';
 import { changePassword } from '@/services/auth.service';
+import { ArrowLeft } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
-export function ChangePasswordSection() {
+export function ChangePassword() {
     const form = useForm<ChangePasswordFormValues>({
         resolver: zodResolver(changePasswordSchema),
     });
@@ -25,7 +27,12 @@ export function ChangePasswordSection() {
 
     return (
         <div className='bg-muted rounded-lg shadow p-6 mt-4 border border-border'>
-            <h2 className='text-xl font-bold mb-6 text-foreground'>Change Password</h2>
+            <div className='flex justify-between'>
+                <Link to='/user/account'>
+                    <ArrowLeft className='h-5 w-5' />
+                </Link>
+                <h2 className='text-xl font-bold mb-6 text-foreground'>Change Password</h2>
+            </div>
 
             <Form {...form}>
                 <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-6'>

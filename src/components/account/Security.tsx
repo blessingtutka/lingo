@@ -6,6 +6,7 @@ import { securityFormSchema } from '@/lib/validators';
 import type { SecurityFormValues } from '@/lib/validators';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Label } from '@/components/ui/label';
+import { Link } from 'react-router-dom';
 
 export function SecuritySection() {
     const form = useForm<SecurityFormValues>({
@@ -32,9 +33,11 @@ export function SecuritySection() {
                             <Label className='text-foreground'>Password</Label>
                             <p className='text-sm text-muted-foreground'>Last changed 3 months ago</p>
                         </div>
-                        <Button variant='outline' type='button'>
-                            Change Password
-                        </Button>
+                        <Link to='/user/change-password'>
+                            <Button variant='outline' type='button'>
+                                Change Password
+                            </Button>
+                        </Link>
                     </div>
 
                     <FormField
