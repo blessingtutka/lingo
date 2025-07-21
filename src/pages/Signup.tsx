@@ -1,6 +1,3 @@
-// src/components/auth/signup-form.tsx
-'use client';
-
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { User, Mail, Lock, UserPlus, Loader2, Github, Gamepad } from 'lucide-react';
@@ -9,6 +6,7 @@ import { Input } from '@/components/ui/input';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Separator } from '@/components/ui/separator';
 import { signupSchema, type SignupFormData } from '@/lib/validators';
+import { PasswordInput } from '@/components/global';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 
 interface SignupFormProps {
@@ -39,8 +37,8 @@ export function SignupForm({ onSubmit, isLoading = false }: SignupFormProps) {
                             <FormLabel>Full Name</FormLabel>
                             <FormControl>
                                 <div className='relative'>
-                                    <Input placeholder='John Doe' {...field} />
-                                    <User className='absolute right-3 top-3 h-4 w-4 text-muted-foreground' />
+                                    <Input placeholder='John Doe' className='!ps-8' {...field} />
+                                    <User className='absolute left-3 top-2.5  h-4 w-4 text-muted-foreground' />
                                 </div>
                             </FormControl>
                             <FormMessage />
@@ -56,8 +54,8 @@ export function SignupForm({ onSubmit, isLoading = false }: SignupFormProps) {
                             <FormLabel>Email</FormLabel>
                             <FormControl>
                                 <div className='relative'>
-                                    <Input placeholder='email@example.com' {...field} />
-                                    <Mail className='absolute right-3 top-3 h-4 w-4 text-muted-foreground' />
+                                    <Input placeholder='email@example.com' className='!ps-8' {...field} />
+                                    <Mail className='absolute left-3 top-2.5  h-4 w-4 text-muted-foreground' />
                                 </div>
                             </FormControl>
                             <FormMessage />
@@ -73,8 +71,8 @@ export function SignupForm({ onSubmit, isLoading = false }: SignupFormProps) {
                             <FormLabel>Password</FormLabel>
                             <FormControl>
                                 <div className='relative'>
-                                    <Input type='password' placeholder='••••••••' {...field} />
-                                    <Lock className='absolute right-3 top-3 h-4 w-4 text-muted-foreground' />
+                                    <PasswordInput placeholder='••••••••' className='!ps-8' {...field} />
+                                    <Lock className='absolute left-3 top-2.5  h-4 w-4 text-muted-foreground' />
                                 </div>
                             </FormControl>
                             <FormMessage />
@@ -91,8 +89,8 @@ export function SignupForm({ onSubmit, isLoading = false }: SignupFormProps) {
                             <FormLabel>Confirm Password</FormLabel>
                             <FormControl>
                                 <div className='relative'>
-                                    <Input type='password' placeholder='••••••••' {...field} />
-                                    <Lock className='absolute right-3 top-3 h-4 w-4 text-muted-foreground' />
+                                    <PasswordInput placeholder='••••••••' className='!ps-8' {...field} />
+                                    <Lock className='absolute left-3 top-2.5 h-4 w-4 text-muted-foreground' />
                                 </div>
                             </FormControl>
                             <FormMessage />
