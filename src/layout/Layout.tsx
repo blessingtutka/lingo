@@ -10,7 +10,7 @@ export default function Layout() {
                 <div className='flex flex-col min-h-screen overflow-hidden'>
                     <HomeHeader />
                     <main className='content-bg flex-1 flex items-center justify-center p-4'>
-                        <div className='w-full max-w-md'>
+                        <div className='w-full md:max-w-4/5 '>
                             <Outlet />
                         </div>
                     </main>
