@@ -3,8 +3,10 @@ import { Separator } from '@/components/ui/separator';
 import { Brand } from '../global';
 import { UserPlus, LogIn, Smile } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { useUser } from '@/providers/user.provider';
 
 export function WelcomeHeader() {
+    const { user } = useUser();
     return (
         <header className='flex h-16 shrink-0 items-center gap-2 border-b transition-[width,height] ease-linear group-has-data-[collapsible=icon]/sidebar-wrapper:h-(--header-height)'>
             <div className='flex w-full items-center gap-1 px-4 lg:gap-2 lg:px-6'>
@@ -14,18 +16,29 @@ export function WelcomeHeader() {
                     <Smile className='h-5' /> <span>Welcome</span>
                 </h1>
                 <div className='ml-auto flex items-center gap-2'>
-                    <Button asChild size='sm' className='main-btn'>
-                        <Link to='/auth?tab=login' className='dark:text-foreground'>
-                            <LogIn />
-                            <span>Login</span>
-                        </Link>
-                    </Button>
-                    <Button asChild size='sm' className='main-btn'>
-                        <Link to='/auth?tab=signup' className='dark:text-foreground'>
-                            <UserPlus />
-                            <span>Signup</span>
-                        </Link>
-                    </Button>
+                    {user ? (
+                        <Button asChild size='sm' className='main-btn'>
+                            <Link to='/user' className='dark:text-foreground'>
+                                <Smile />
+                                <span>Go to App</span>
+                            </Link>
+                        </Button>
+                    ) : (
+                        <>
+                            <Button asChild size='sm' className='main-btn'>
+                                <Link to='/auth?tab=login' className='dark:text-foreground'>
+                                    <LogIn />
+                                    <span>Login</span>
+                                </Link>
+                            </Button>
+                            <Button asChild size='sm' className='main-btn'>
+                                <Link to='/auth?tab=signup' className='dark:text-foreground'>
+                                    <UserPlus />
+                                    <span>Signup</span>
+                                </Link>
+                            </Button>
+                        </>
+                    )}
                 </div>
             </div>
         </header>
