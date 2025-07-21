@@ -2,7 +2,7 @@ import { z } from 'zod';
 
 export const loginSchema = z.object({
     email: z.string().email('Invalid email address'),
-    password: z.string().min(8, 'Password must be at least 8 characters'),
+    password: z.string().min(5, 'Password must be at least 5 characters'),
     remember: z.boolean().optional(),
 });
 
@@ -44,6 +44,18 @@ export const notificationsFormSchema = z.object({
     pushLikes: z.boolean(),
 });
 
+export const changePasswordSchema = z
+    .object({
+        oldPassword: z.string().min(6),
+        newPassword: z.string().min(6),
+        confirmPassword: z.string().min(6),
+    })
+    .refine((data) => data.newPassword === data.confirmPassword, {
+        message: "Passwords don't match",
+        path: ['confirmPassword'],
+    });
+
+export type ChangePasswordFormValues = z.infer<typeof changePasswordSchema>;
 export type NotificationsFormValues = z.infer<typeof notificationsFormSchema>;
 export type SecurityFormValues = z.infer<typeof securityFormSchema>;
 export type ProfileFormValues = z.infer<typeof profileFormSchema>;
