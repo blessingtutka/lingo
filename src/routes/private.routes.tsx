@@ -1,7 +1,8 @@
 import { ProtectedRoute } from './protected.routes';
 import Home from '@/pages/Home';
-import { Account } from '@/pages/Account';
+import Account from '@/pages/Account';
 import Call from '@/pages/Call';
+import { ChangePassword } from '@/components/account/ChangePassword';
 
 const privateRoutes = [
     {
@@ -26,6 +27,14 @@ const privateRoutes = [
         element: (
             <ProtectedRoute>
                 <Call />
+            </ProtectedRoute>
+        ),
+    },
+    {
+        path: 'change-password',
+        element: (
+            <ProtectedRoute>
+                <ChangePassword />
             </ProtectedRoute>
         ),
     },
