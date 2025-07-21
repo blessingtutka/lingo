@@ -49,7 +49,7 @@ const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
         if (token && !isTokenExpired(token)) {
             try {
                 const userProfile = await getUserProfile();
-                setUser(userProfile);
+                setUser({ ...userProfile, token });
             } catch {
                 removeToken();
             }
