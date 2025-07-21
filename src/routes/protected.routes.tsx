@@ -1,8 +1,9 @@
 import { Navigate, useLocation } from 'react-router-dom';
+import { useUser } from '@/providers/user.provider';
 
 export function ProtectedRoute({ children }: { children: React.ReactNode }) {
-    //   const { isAuthenticated } = useAuth(); // Your auth context
-    const isAuthenticated = true;
+    const { user } = useUser();
+    const isAuthenticated = !!user;
     const location = useLocation();
 
     if (!isAuthenticated) {
