@@ -4,7 +4,7 @@ interface User {
     email: string;
     avatar?: string;
     phone?: string;
-    displayName: string;
+    contacts?: User[];
 }
 
 interface Summary {
@@ -16,7 +16,7 @@ interface Summary {
 }
 
 interface AuthResponse {
-    token: string;
+    accessToken: string;
     user?: User;
 }
 
