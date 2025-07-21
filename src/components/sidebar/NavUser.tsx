@@ -1,6 +1,4 @@
 import { EllipsisVertical, LogOut, Bell, CircleUserRound } from 'lucide-react';
-
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import {
     DropdownMenu,
     DropdownMenuContent,
@@ -12,10 +10,13 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { UserAvatar } from '../global';
 import { Link } from 'react-router-dom';
+import { useUser } from '@/providers/user.provider';
 import { SidebarMenu, SidebarMenuButton, SidebarMenuItem, useSidebar } from '@/components/ui/sidebar';
+import { Button } from '../ui/button';
 
 export function NavUser({ user }: { user: User }) {
     const { isMobile } = useSidebar();
+    const { removeToken } = useUser();
 
     return (
         <SidebarMenu>
@@ -25,7 +26,7 @@ export function NavUser({ user }: { user: User }) {
                         <SidebarMenuButton size='lg' className='data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground'>
                             <UserAvatar user={user} />
                             <div className='grid flex-1 text-left text-sm leading-tight'>
-                                <span className='truncate font-medium'>{user.displayName}</span>
+                                <span className='truncate font-medium'>{user.name || user.email}</span>
                                 <span className='text-muted-foreground truncate text-xs'>{user.email}</span>
                             </div>
                             <EllipsisVertical className='ml-auto size-4' />
@@ -39,10 +40,7 @@ export function NavUser({ user }: { user: User }) {
                     >
                         <DropdownMenuLabel className='p-0 font-normal'>
                             <div className='flex items-center gap-2 px-1 py-1.5 text-left text-sm'>
-                                <Avatar className='h-8 w-8 rounded-lg'>
-                                    <AvatarImage src={user.avatar} alt={user.name} />
-                                    <AvatarFallback className='rounded-lg'>CN</AvatarFallback>
-                                </Avatar>
+                                <UserAvatar user={user} />
                                 <div className='grid flex-1 text-left text-sm leading-tight'>
                                     <span className='truncate font-medium'>{user.name}</span>
                                     <span className='text-muted-foreground truncate text-xs'>{user.email}</span>
@@ -66,10 +64,18 @@ export function NavUser({ user }: { user: User }) {
                         </DropdownMenuGroup>
                         <DropdownMenuSeparator />
                         <DropdownMenuItem asChild>
-                            <Link to={'/user/logout'} className='flex w-full items-center gap-2 px-2 py-1.5 text-sm outline-none'>
+                            <Button
+                                onClick={(e) => {
+                                    e.preventDefault();
+                                    if (confirm('Are you sure you want to log out?')) {
+                                        removeToken();
+                                    }
+                                }}
+                                className='flex w-full items-center gap-2 px-2 py-1.5 text-sm outline-none'
+                            >
                                 <LogOut />
                                 Log out
-                            </Link>
+                            </Button>
                         </DropdownMenuItem>
                     </DropdownMenuContent>
                 </DropdownMenu>

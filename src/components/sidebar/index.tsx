@@ -14,9 +14,16 @@ import { NavContact } from './NavContact';
 import { NavUser } from './NavUser';
 import { NavBrand } from './NavBrand';
 import { NavContactSkeleton } from '../skeleton';
-import { getUser } from '@/services/user.service';
-
+import { useUser } from '@/providers/user.provider';
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+    const { getUser } = useUser();
+    let user = getUser();
+    if (!user)
+        user = {
+            id: '1',
+            name: 'Anomymous',
+            email: 'an@gmail.com',
+        };
     return (
         <Sidebar collapsible='offcanvas' {...props}>
             <SidebarHeader>
@@ -34,7 +41,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
             </SidebarContent>
             <SidebarFooter>
                 <SidebarMenuButton asChild>
-                    <NavUser user={getUser()} />
+                    <NavUser user={user} />
                 </SidebarMenuButton>
             </SidebarFooter>
         </Sidebar>
