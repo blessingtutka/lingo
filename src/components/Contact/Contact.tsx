@@ -1,3 +1,12 @@
+import { EllipsisVertical, Trash2, ScrollText, BrushCleaning } from 'lucide-react';
+import {
+    DropdownMenu,
+    DropdownMenuContent,
+    DropdownMenuGroup,
+    DropdownMenuItem,
+    DropdownMenuSeparator,
+    DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
 import { Phone, PhoneIncoming, PhoneForwarded, PhoneOff, ArrowLeft } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { useParams, Navigate, Link } from 'react-router-dom';
@@ -117,6 +126,40 @@ export function Contact() {
                                                     </p>
                                                     <p className='flex flex-col text-sm text-gray-500'>{formatCallTime(call.startedAt)}</p>
                                                 </div>
+                                            </div>
+                                            <div className='ml-auto flex items-center gap-2'>
+                                                <DropdownMenu>
+                                                    <DropdownMenuTrigger asChild>
+                                                        <EllipsisVertical className='ml-auto size-4 group-hover:text-black' />
+                                                    </DropdownMenuTrigger>
+                                                    <DropdownMenuContent
+                                                        className='w-(--radix-dropdown-menu-trigger-width) min-w-56 rounded-lg'
+                                                        align='end'
+                                                        sideOffset={4}
+                                                    >
+                                                        <DropdownMenuGroup>
+                                                            <DropdownMenuItem asChild>
+                                                                <Link
+                                                                    to={`/user/contact/${contactId}/call/summary`}
+                                                                    className='flex w-full items-center gap-2 p-3 text-sm outline-none'
+                                                                >
+                                                                    <ScrollText />
+                                                                    Summary
+                                                                </Link>
+                                                            </DropdownMenuItem>
+                                                            <DropdownMenuSeparator />
+                                                            <DropdownMenuItem asChild>
+                                                                <Link
+                                                                    to={`/user/contact/${contactId}/call/delete`}
+                                                                    className='flex !text-destructive w-full items-center gap-2 p-3 text-sm outline-none'
+                                                                >
+                                                                    <Trash2 className='!text-destructive' />
+                                                                    Delete Call
+                                                                </Link>
+                                                            </DropdownMenuItem>
+                                                        </DropdownMenuGroup>
+                                                    </DropdownMenuContent>
+                                                </DropdownMenu>
                                             </div>
                                         </div>
                                     </li>
