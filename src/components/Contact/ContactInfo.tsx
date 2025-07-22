@@ -1,7 +1,9 @@
+import { Phone } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { useUser } from '@/providers/user.provider';
 import { useParams } from 'react-router-dom';
+import { Navigate, Link } from 'react-router-dom';
 
 export function ContactInfo() {
     const { user } = useUser();
@@ -17,7 +19,9 @@ export function ContactInfo() {
 
     const contact = user?.contacts?.find((c) => c.id === contactId) || placeholderContact;
 
-    if (!contact) return null;
+    if (!contact) {
+        return <Navigate to='/user' replace />;
+    }
 
     return (
         <Card className='bg-muted rounded-lg shadow p-6 mt-4 border border-border'>
@@ -50,10 +54,12 @@ export function ContactInfo() {
                 </div>
             </div>
 
-            <div className='flex justify-end gap-2 mt-6'>
-                <Button variant='outline'>Send Message</Button>
-                <Button>Call</Button>
-            </div>
+            <Link to={`/user/contact/${contactId}/call`} className='w-full flex justify-center items-center'>
+                <Button className='w-full flex gap-2 items-center'>
+                    <Phone />
+                    Call
+                </Button>
+            </Link>
         </Card>
     );
 }
