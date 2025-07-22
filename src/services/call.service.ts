@@ -2,24 +2,6 @@
 import axios from '../axios';
 import type { AxiosResponse } from 'axios';
 
-interface Call {
-    id: string;
-    callerId: string;
-    receiverId: string;
-    startedAt: string;
-    endedAt: string | null;
-    peerId: string;
-    status: 'REQUESTING' | 'ONGOING' | 'MISSED' | 'REJECTED' | 'ENDED';
-    isCaller?: boolean;
-}
-
-interface ApiResponse<T> {
-    status: string;
-    message: string;
-    data: T;
-    status_code: number;
-}
-
 export const getCall = async (id: string): Promise<ApiResponse<Call>> => {
     try {
         const response: AxiosResponse<ApiResponse<Call>> = await axios.get(`/call/${id}`);
