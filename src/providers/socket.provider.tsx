@@ -26,7 +26,7 @@ export const SocketProvider: React.FC<{ children: React.ReactNode }> = ({ childr
     const [callState, setCallState] = useState<CallState | null>(null);
 
     useEffect(() => {
-        const socketInstance = io('http://localhost:5000', {
+        const socketInstance = io(import.meta.env.VITE_SOCKET_BASE_URL, {
             withCredentials: true,
             autoConnect: false,
         });
