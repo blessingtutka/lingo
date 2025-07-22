@@ -1,34 +1,33 @@
 import { ProtectedRoute } from './protected.routes';
-import Home from '@/pages/Home';
-import Account from '@/pages/Account';
-import { ChangePassword } from '@/components/account/ChangePassword';
 
-const privateRoutes = [
+import Call from '@/pages/Call';
+import { ContactInfo, Contact } from '@/components/Contact';
+
+const contactRoutes = [
     {
         path: '',
         element: (
             <ProtectedRoute>
-                <Home />
-            </ProtectedRoute>
-        ),
-        exact: true,
-    },
-    {
-        path: 'account',
-        element: (
-            <ProtectedRoute>
-                <Account />
+                <Contact />
             </ProtectedRoute>
         ),
     },
     {
-        path: 'change-password',
+        path: 'info',
         element: (
             <ProtectedRoute>
-                <ChangePassword />
+                <ContactInfo />
+            </ProtectedRoute>
+        ),
+    },
+    {
+        path: 'call',
+        element: (
+            <ProtectedRoute>
+                <Call />
             </ProtectedRoute>
         ),
     },
 ];
 
-export default privateRoutes;
+export default contactRoutes;
