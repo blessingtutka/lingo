@@ -7,8 +7,12 @@ import type { SecurityFormValues } from '@/lib/validators';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Label } from '@/components/ui/label';
 import { Link } from 'react-router-dom';
+import { useUser } from '@/providers/user.provider';
+import { toast } from 'sonner';
+import { requestEmailVerification, updateSecurity } from '@/services/auth.service';
 
 export function SecuritySection() {
+    const { user } = useUser();
     const form = useForm<SecurityFormValues>({
         resolver: zodResolver(securityFormSchema),
         defaultValues: {
@@ -17,9 +21,24 @@ export function SecuritySection() {
         },
     });
 
-    const onSubmit = (data: SecurityFormValues) => {
-        console.log(data);
-        // Handle form submission
+    const onSubmit = async (data: SecurityFormValues) => {
+        try {
+            await updateSecurity(data);
+            toast.success('security info updated successfully');
+            form.reset();
+        } catch (error: any) {
+            toast.error(error.message);
+        }
+    };
+
+    const onVerifyEmail = async () => {
+        try {
+            await requestEmailVerification();
+            toast.success('Verification email send successfully');
+            form.reset();
+        } catch (error: any) {
+            toast.error(error.message);
+        }
     };
 
     return (
@@ -38,6 +57,20 @@ export function SecuritySection() {
                                 Change Password
                             </Button>
                         </Link>
+                    </div>
+
+                    <div className='flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4'>
+                        <div>
+                            <Label className='text-foreground'>Email verification</Label>
+                            <p className='text-sm text-muted-foreground'>
+                                {user && user?.emailVerified ? 'Email not verified' : 'Please verify your Email'}
+                            </p>
+                        </div>
+                        {!user?.emailVerified && (
+                            <Button onClick={() => onVerifyEmail} variant='outline' type='button'>
+                                Verify your email
+                            </Button>
+                        )}
                     </div>
 
                     <FormField
