@@ -37,11 +37,9 @@ export const securityFormSchema = z.object({
 });
 
 export const notificationsFormSchema = z.object({
-    emailMessages: z.boolean(),
-    emailComments: z.boolean(),
-    emailMentions: z.boolean(),
-    pushFollowers: z.boolean(),
-    pushLikes: z.boolean(),
+    newContactAlert: z.boolean(),
+    missedCallAlert: z.boolean(),
+    summaryReport: z.boolean(),
 });
 
 export const changePasswordSchema = z
@@ -55,6 +53,22 @@ export const changePasswordSchema = z
         path: ['confirmPassword'],
     });
 
+export const resetPasswordSchema = z
+    .object({
+        newPassword: z.string().min(6),
+        confirmPassword: z.string().min(6),
+    })
+    .refine((data) => data.newPassword === data.confirmPassword, {
+        message: "Passwords don't match",
+        path: ['confirmPassword'],
+    });
+
+export const restPassowordRequestSchema = z.object({
+    email: z.string().email('Invalid email address'),
+});
+
+export type resetPasswordRequestValue = z.infer<typeof restPassowordRequestSchema>;
+export type resetPasswordValues = z.infer<typeof resetPasswordSchema>;
 export type ChangePasswordFormValues = z.infer<typeof changePasswordSchema>;
 export type NotificationsFormValues = z.infer<typeof notificationsFormSchema>;
 export type SecurityFormValues = z.infer<typeof securityFormSchema>;

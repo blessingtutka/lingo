@@ -6,6 +6,8 @@ interface User {
     phone?: string;
     contacts?: User[];
     token?: string;
+    emailVerified?: boolean;
+    twoFactorEnabled?: boolean;
 }
 
 interface Summary {
