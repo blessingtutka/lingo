@@ -7,6 +7,7 @@ import { Checkbox } from '@/components/ui/checkbox';
 import { Separator } from '@/components/ui/separator';
 import { loginSchema, type LoginFormData } from '@/lib/validators';
 import { PasswordInput } from '@/components/global';
+import { Link } from 'react-router-dom';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 
 interface LoginFormProps {
@@ -51,9 +52,11 @@ export function LoginForm({ onSubmit, isLoading = false }: LoginFormProps) {
                         <FormItem>
                             <div className='flex justify-between items-center '>
                                 <FormLabel>Password</FormLabel>
-                                <Button variant='link' size='sm' className='text-primary px-0'>
-                                    Forgot password?
-                                </Button>
+                                <Link to='/password-reset-request'>
+                                    <Button variant='link' size='sm' className='text-primary px-0'>
+                                        Forgot password?
+                                    </Button>
+                                </Link>
                             </div>
                             <FormControl>
                                 <div className='relative'>
